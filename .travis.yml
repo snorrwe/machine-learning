@@ -7,14 +7,11 @@ language: python
 python:
   - "2.7"
   - "3.6"
-  - "pypy"
-  - "pypy3"
 env:
-  - COMPONENT = "knn"
+  - COMPONENT=knn
 install:
 - cd $COMPONENT
 - sudo apt-get install python-scipy
-- pip install -r requirements.txt
 script:
 - pytest
 git:

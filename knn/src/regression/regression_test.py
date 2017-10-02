@@ -3,6 +3,7 @@ import random
 import pandas as pd
 import os
 import sys
+import unittest
 from sklearn.metrics import mean_absolute_error
 from .regression import Regression
 import matplotlib as mpl
@@ -11,6 +12,11 @@ import matplotlib.pyplot as pyplot
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.setrecursionlimit(10000)
+
+
+class RegressionSanityTest(unittest.TestCase):
+    def test_can_create(self):
+        Regression()
 
 
 class RegressionTest(object):
