@@ -1,0 +1,32 @@
+sudo: required
+dist: trusty
+stages:
+  - test
+  - lint
+language: python
+python:
+  - "2.7"
+  - "3.6"
+  - "pypy"
+  - "pypy3"
+env:
+  - COMPONENT = "knn"
+install:
+- cd $COMPONENT
+- sudo apt-get install python-scipy
+- pip install -r requirements.txt
+script:
+- pytest
+git:
+  depth:
+    3
+jobs:
+  include:
+  - stage: lint
+    env:
+    language: python
+    python: 3.6
+    install:
+    - pip install pylint
+    script:
+    - pylint 
