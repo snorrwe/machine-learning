@@ -11,7 +11,6 @@ mpl.use('Agg')
 import matplotlib.pyplot as pyplot
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.setrecursionlimit(10000)
 
 
 class RegressionSanityTest(unittest.TestCase):
@@ -40,23 +39,24 @@ class RegressionTest(object):
         houses = (houses - houses.mean()) / (houses.max() - houses.min())
         self.houses = houses[['lat', 'long', 'SqFtLot']]
 
-    def plot_error_rates(self):
+    def plot_error_rates(self, count, outfile):
         """
         Plots MAE vs #folds
         """
-        folds_range = range(2, 11)
-        errors_df = pd.DataFrame({'max': 0, 'min': 0}, index=folds_range)
-        for folds in folds_range:
-            errors = self.tests(folds)
-            errors_df['max'][folds] = max(errors)
-            errors_df['min'][folds] = min(errors)
-        errors_df.plot(title='Mean Absolute Error of KNN over different folds_range')
-        pyplot.xlabel('#folds_range')
-        pyplot.ylabel('MAE')
-        pyplot.savefig('result.png', dpi=None, facecolor='w', edgecolor='w',
-                       orientation='portrait', papertype=None, format='png',
-                       transparent=False, bbox_inches=None, pad_inches=0.1,
-                       frameon=None)
+        for i in range(count):
+            folds_range = range(3, 11)
+            errors_df = pd.DataFrame({'max': 0, 'min': 0}, index=folds_range)
+            for folds in folds_range:
+                errors = self.tests(folds)
+                errors_df['max'][folds] = max(errors)
+                errors_df['min'][folds] = min(errors)
+            errors_df.plot(title='Mean Absolute Error of KNN over different folds_range')
+            pyplot.xlabel('#folds_range')
+            pyplot.ylabel('MAE')
+            pyplot.savefig('results/%s_%s.png' % (outfile, i), dpi=None, facecolor='w', edgecolor='w',
+                           orientation='portrait', papertype=None, format='png',
+                           transparent=False, bbox_inches=None, pad_inches=0.1,
+                           frameon=None)
 
     def tests(self, folds):
         """
@@ -99,10 +99,13 @@ class RegressionTest(object):
 
 
 def main():
+    sys.setrecursionlimit(10000)
     regression_test = RegressionTest()
-    fpath = os.path.sep.join([HERE, '..', '..', 'data', 'king_county_data_geocoded.csv'])
-    regression_test.load_csv_file(fpath, 100)
-    regression_test.plot_error_rates()
+    data_path = os.path.sep.join([HERE, '..', '..', 'data'])
+    for path in os.listdir(data_path):
+        fpath = os.path.sep.join([data_path, path])
+        regression_test.load_csv_file(fpath, 1000)
+        regression_test.plot_error_rates(5, path)
 
 
 if __name__ == '__main__':

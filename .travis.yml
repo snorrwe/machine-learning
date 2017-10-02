@@ -11,6 +11,7 @@ env:
   - COMPONENT=knn
 install:
 - cd $COMPONENT
+- ls
 - sudo apt-get install python-scipy
 - pip install -r requirements.py
 script:
