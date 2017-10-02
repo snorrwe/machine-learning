@@ -95,7 +95,7 @@ class RegressionTest(object):
 def main():
     regression_test = RegressionTest()
     fpath = os.path.sep.join([HERE, '..', '..', 'data', 'king_county_data_geocoded.csv'])
-    regression_test.load_csv_file(fpath, 1000)
+    regression_test.load_csv_file(fpath, 100)
     regression_test.plot_error_rates()
 
 
