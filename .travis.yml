@@ -12,6 +12,7 @@ env:
 install:
 - cd $COMPONENT
 - sudo apt-get install python-scipy
+- pip -r install requirements.py
 script:
 - pytest
 git:
