@@ -12,7 +12,7 @@ import unittest
 import time
 import json
 from sklearn.metrics import mean_absolute_error
-from src.regression.regressor import Regressor
+from knn.src.regression.regressor import Regressor
 import matplotlib as mpl
 import numpy as np
 mpl.use('Agg')
