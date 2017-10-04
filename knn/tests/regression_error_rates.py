@@ -12,7 +12,7 @@ import unittest
 import time
 import json
 from sklearn.metrics import mean_absolute_error
-from .regression import Regression
+from src.regression.regression import Regression
 import matplotlib as mpl
 import numpy as np
 mpl.use('Agg')
@@ -20,6 +20,8 @@ import matplotlib.pyplot as pyplot
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+RESULTS = os.path.join(HERE, 'results', 'error_rates')
+DATA = os.path.join(HERE, 'data')
 
 
 class RegressionSanityTest(unittest.TestCase):
@@ -67,7 +69,8 @@ class RegressionHousesTests(object):
             errors_df.plot(title='Mean Absolute Error of KNN over different folds_range')
             pyplot.xlabel('#folds_range')
             pyplot.ylabel('MAE')
-            fname = 'results/%s_%s.png' % (outfile, i)
+            fname = '%s_%s.png' % (outfile, i)
+            fname = os.path.join(RESULTS, fname)
             pyplot.savefig(fname, dpi=None, facecolor='w', edgecolor='w',
                            orientation='portrait', papertype=None, format='png',
                            transparent=False, bbox_inches=None, pad_inches=0.1,
@@ -125,7 +128,7 @@ Delta Times = {times}
 
 
 def test_datas(directory, columns, value_col):
-    data_path = os.path.sep.join([HERE, '..', '..', 'data', directory])
+    data_path = os.path.join(DATA, directory)
     regression_test = RegressionHousesTests()
     for path in os.listdir(data_path):
         fpath = os.path.sep.join([data_path, path])
@@ -134,13 +137,16 @@ def test_datas(directory, columns, value_col):
 
 
 def clean_results(directory):
-    for file in os.listdir(directory):
-        os.remove(os.path.join(directory, file))
+    if not os.path.isdir(directory):
+        os.makedirs(directory)
+    else:
+        for file in os.listdir(directory):
+            os.remove(os.path.join(directory, file))
 
 
 def main():
     sys.setrecursionlimit(10000)
-    clean_results('results')
+    clean_results(RESULTS)
     test_datas('houses', ['lat', 'long', 'SqFtLot'], 'AppraisedValue')
     test_datas('cars', ["wheel-base", "length", "width", "height", "engine-size",
                         "stroke", "horsepower", "peak-rpm", "city-mpg", "highway-mpg"], 'price')
