@@ -150,6 +150,7 @@ def main():
     test_datas('houses', ['lat', 'long', 'SqFtLot'], 'AppraisedValue')
     test_datas('cars', ["wheel-base", "length", "width", "height", "engine-size",
                         "stroke", "horsepower", "peak-rpm", "city-mpg", "highway-mpg"], 'price')
+    test_datas('stock', ['time'], 'price')
 
 
 if __name__ == '__main__':

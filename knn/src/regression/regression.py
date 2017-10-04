@@ -16,7 +16,7 @@ class Regression(object):
         self.values = None
         self.kdtree = None
 
-    def set_data(self, data, values, k=5):
+    def set_data(self, data, values, **kwargs):
         """
         Sets data and values
         :param data: pandas.DataFrame with object parameters
@@ -25,7 +25,8 @@ class Regression(object):
         self.data = data
         self.kdtree = KDTree(self.data)
         self.values = values
-        self.k = k
+        if 'k' in kwargs:
+            self.k = kwargs['k']
 
     def regress(self, query_point):
         """
