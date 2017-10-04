@@ -13,7 +13,7 @@ install:
 - cd $COMPONENT
 - ls
 - sudo apt-get install python-scipy
-- pip install -r requirements.py
+- sudo pip install -r requirements.py
 script:
 - pytest
 git:

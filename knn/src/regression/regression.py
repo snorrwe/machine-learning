@@ -18,7 +18,7 @@ class Regression(object):
 
     def set_data(self, data, values, k=5):
         """
-        Sets houses and values data
+        Sets data and values
         :param data: pandas.DataFrame with object parameters
         :param values: pandas.Series with object values
         """

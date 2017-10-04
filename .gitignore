@@ -2,3 +2,5 @@
 .ropeproject
 knn/result.png
 results
+tmp*
+*.sublime-workspace
