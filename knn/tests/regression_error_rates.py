@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-Testing the Regression class
+Testing the Regressor class
 Run this from /knn/
 like so: python -m src.regression.regression_test
 """
@@ -12,7 +12,7 @@ import unittest
 import time
 import json
 from sklearn.metrics import mean_absolute_error
-from src.regression.regression import Regression
+from src.regression.regressor import Regressor
 import matplotlib as mpl
 import numpy as np
 mpl.use('Agg')
@@ -24,12 +24,12 @@ RESULTS = os.path.join(HERE, 'results', 'error_rates')
 DATA = os.path.join(HERE, 'data')
 
 
-class RegressionSanityTest(unittest.TestCase):
+class RegressorSanityTest(unittest.TestCase):
     def test_can_create(self):
-        Regression()
+        Regressor()
 
 
-class RegressionHousesTests(object):
+class RegressorHousesTests(object):
     """
     Take in King County housing data, calculate and plot the kNN regression error rate.
     """
@@ -114,7 +114,7 @@ Delta Times = {times}
         df_train = self.data.drop(test_rows)
 
         train_values = self.values.ix[train_rows]
-        regression = Regression()
+        regression = Regressor()
         regression.set_data(df_train, train_values)
 
         values_regr = []
@@ -129,7 +129,7 @@ Delta Times = {times}
 
 def test_datas(directory, columns, value_col):
     data_path = os.path.join(DATA, directory)
-    regression_test = RegressionHousesTests()
+    regression_test = RegressorHousesTests()
     for path in os.listdir(data_path):
         fpath = os.path.sep.join([data_path, path])
         regression_test.load_csv_file(fpath, columns, value_col, 100)
@@ -147,9 +147,9 @@ def clean_results(directory):
 def main():
     sys.setrecursionlimit(10000)
     clean_results(RESULTS)
-    test_datas('houses', ['lat', 'long', 'SqFtLot'], 'AppraisedValue')
-    test_datas('cars', ["wheel-base", "length", "width", "height", "engine-size",
-                        "stroke", "horsepower", "peak-rpm", "city-mpg", "highway-mpg"], 'price')
+    # test_datas('houses', ['lat', 'long', 'SqFtLot'], 'AppraisedValue')
+    # test_datas('cars', ["wheel-base", "length", "width", "height", "engine-size",
+    #                     "stroke", "horsepower", "peak-rpm", "city-mpg", "highway-mpg"], 'price')
     test_datas('stock', ['time'], 'price')
 
 
