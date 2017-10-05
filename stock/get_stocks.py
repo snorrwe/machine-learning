@@ -1,7 +1,11 @@
 import csv
+import os
 import time
 from datetime import datetime
 import requests
+
+
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_delta(index, stocks, n):
@@ -23,9 +27,9 @@ def calculate_deltas(stocks):
     return stocks
 
 
-def main():
-    result = requests.get('https://www.coinbase.com/api/v2/prices/BTC-HUF/historic?period=year')
-    with open('BTC-HUF.csv', 'w') as f:
+def pull_stocks(url, fname):
+    result = requests.get(url)
+    with open(os.path.join(HERE, 'data', fname), 'w') as f:
         prices = result.json()['data']['prices']
         prices = calculate_deltas(prices)
         writer = csv.DictWriter(f, prices[0].keys())
@@ -36,6 +40,11 @@ def main():
             t = int(time.mktime(t.timetuple()))
             row['time'] = t
             writer.writerow(row)
+
+
+def main():
+    pull_stocks('https://www.coinbase.com/api/v2/prices/BTC-HUF/historic?period=year', 'BTC-HUF-year.csv')
+    pull_stocks('https://www.coinbase.com/api/v2/prices/BTC-HUF/historic?period=day', 'BTC-HUF-day.csv')
 
 
 if __name__ == '__main__':

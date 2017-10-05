@@ -3,7 +3,7 @@ from scipy.spatial import KDTree
 import numpy as np
 
 
-class Regression(object):
+class Regressor(object):
     """
     Performs KNN regression
     """
@@ -27,6 +27,11 @@ class Regression(object):
         self.values = values
         if 'k' in kwargs:
             self.k = kwargs['k']
+
+    def append_data(self, data, value):
+        self.data.add(data)
+        self.kdtree = KDTree(self.data)
+        self.values.add(value)
 
     def regress(self, query_point):
         """
