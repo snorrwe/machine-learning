@@ -13,7 +13,6 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ.
 
 
 class LanguageTests(unittest.TestCase):
-
     def setUp(self):
         self.special_characters = LANGUAGE_DATA.split('\n')
         self.language_io = StringIO(LANGUAGE_DATA)
