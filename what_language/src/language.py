@@ -1,4 +1,4 @@
-from what_language.tokenizer import tokenize
+from what_language.src.tokenizer import tokenize
 
 
 class Language(object):

@@ -1,0 +1,13 @@
+click==6.7
+climate==0.4.6
+colorama==0.3.9
+downhill==0.4.0
+nose-parameterized==0.6.0
+numpy==1.13.3+mkl
+plac==0.9.6
+py==1.4.34
+pytest==3.2.3
+scipy==1.0.0rc1
+six==1.11.0
+theanets==0.7.3
+Theano==0.9.0

@@ -1,7 +1,7 @@
 import unittest
 from io import StringIO
 import string
-from what_language.language import Language
+from what_language.src.language import Language
 
 LANGUAGE_DATA = u'''
 abcdefghijklmnopqrstuvwxyz.
