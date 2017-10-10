@@ -17,7 +17,7 @@ class Network(object):
     def train(self):
         self._build_trainer()
         self._build_ann()
-        self._net.train(self._trainer, learning_rate=1e-5)
+        self._net.train(self._trainer, learning_rate=0.05)
 
     def _build_trainer(self):
         inputs = []

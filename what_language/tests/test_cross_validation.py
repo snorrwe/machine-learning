@@ -52,7 +52,6 @@ class TestNetwork(unittest.TestCase):
             if language.name == get_language_name(file_name):
                 hits += 1
             else:
-                print(language.name)
                 misses += 1
         total = misses + hits
         self.assertGreater(total, 0)
