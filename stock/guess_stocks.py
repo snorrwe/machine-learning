@@ -2,6 +2,7 @@
 import pandas as pd
 import os
 from knn.src.regression.regressor import Regressor
+from .get_stocks import main as get_stocks
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as pyplot
@@ -86,4 +87,5 @@ def main():
 
 
 if __name__ == '__main__':
+    get_stocks()
     main()
