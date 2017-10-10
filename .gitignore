@@ -4,3 +4,4 @@ knn/result.png
 results
 tmp*
 *.sublime-workspace
+what_language/.lang/* #virtual env
