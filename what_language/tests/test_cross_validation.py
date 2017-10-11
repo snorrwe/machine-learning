@@ -8,7 +8,7 @@ from parameterized import parameterized
 from what_language.src.language import Language
 from what_language.src.network import Network
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.dirname(os.path.realpath(__file__))
 
 
 def get_language_name(file_name):
