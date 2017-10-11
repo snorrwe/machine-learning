@@ -8,6 +8,8 @@ from parameterized import parameterized
 from what_language.src.language import Language
 from what_language.src.network import Network
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+
 
 def get_language_name(file_name):
     basename, ext = os.path.splitext(os.path.basename(file_name))
@@ -24,8 +26,8 @@ def load_glob(pattern):
 
 class TestNetwork(unittest.TestCase):
 
-    matthew_languages = load_glob('../data/*_0.txt')
-    acts_languages = load_glob('../data/*_1.txt')
+    matthew_languages = load_glob('%s/../data/*_0.txt' % HERE)
+    acts_languages = load_glob('%s/../data/*_1.txt' % HERE)
     matthew_verses = Network(matthew_languages)
     matthew_verses.train()
     acts_verses = Network(acts_languages)
@@ -37,8 +39,8 @@ class TestNetwork(unittest.TestCase):
     def test_accuracy(self, lang):
         """Trains and cross-validates with an error of 5%"""
         print('Test for %s' % lang)
-        self.compare(self.matthew_verses, '../data/%s_1.txt' % lang)
-        self.compare(self.acts_verses, '../data/%s_0.txt' % lang)
+        self.compare(self.matthew_verses, '%s/../data/%s_1.txt' % (HERE, lang))
+        self.compare(self.acts_verses, '%s/../data/%s_0.txt' % (HERE, lang))
 
     def compare(self, network, file_name):
         misses = 0.0

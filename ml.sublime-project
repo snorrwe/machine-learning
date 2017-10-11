@@ -1,16 +1,22 @@
 {
-    "build_systems":
-    [
-        {
-            "name": "Activate language-env",
-            "shell_cmd": "what_language\\.lang\\Scripts\\activate && cd ${file_path} && start",
-            "working_dir": "${project_path:${folder}}"
-        }
-    ],
-    "folders":
-    [
-        {
-            "path": "."
-        }
-    ]
+	"build_systems":
+	[
+		{
+			"name": "Activate language-env",
+			"shell_cmd": "what_language\\.lang\\Scripts\\activate && cd ${file_path} && start",
+			"working_dir": "${project_path:${folder}}"
+		},
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Anaconda Python Builder",
+			"selector": "source.python",
+			"shell_cmd": "\"python\" -u \"$file\""
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	]
 }
