@@ -1,0 +1,4 @@
+{
+  "test_cross_validation.py::TestNetwork::test_accuracy_0_German": true,
+  "test_cross_validation.py::TestNetwork::test_accuracy_2_German": true
+}
