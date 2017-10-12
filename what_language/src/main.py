@@ -29,10 +29,10 @@ def main():
     network = Network(languages)
     network.train()
     while 1:
-        sentence = input("Gimme a sentence, bitch")
+        sentence = input("\nGimme a sentence!\n")
         io = StringIO(sentence)
         result = network.predict(io)
-        print('\n%s\n' % result.name)
+        print('\nThis sentence is in [%s]\n' % result.name)
 
 
 if __name__ == '__main__':
